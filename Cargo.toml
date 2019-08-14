@@ -67,6 +67,9 @@ git = "https://github.com/mesalock-linux/webpki-roots"
 tag = "v1.1.0"
 default-features = false
 
+[build-dependencies]
+walkdir = "2"
+
 [dev-dependencies]
 log = "0.4"
 env_logger = "0.6"
