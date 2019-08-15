@@ -98,14 +98,16 @@ fn generate_headers() -> std::io::Result<()> {
     )?;
 
     let mut options_h = fs::File::create(include_dir.join("mesalink/options.h"))?;
-    options_h.write_all(b"\
+    options_h.write_all(
+        b"\
         #ifndef MESALINK_OPTIONS_H\n\
         #define MESALINK_OPTIONS_H\n\n\
 
         #ifdef __cplusplus\n\
         extern \"C\" {\n\
         #endif\n\n\
-    ")?;
+    ",
+    )?;
 
     fn write_define(mut writer: impl Write, name: &str) -> std::io::Result<()> {
         write!(writer, "\n#undef {}\n#define {}\n", name, name)
@@ -171,13 +173,15 @@ fn generate_headers() -> std::io::Result<()> {
         write_define(&mut options_h, "NO_SGX")?;
     }
 
-    options_h.write_all(b"\n\
+    options_h.write_all(
+        b"\n\
         #ifdef __cplusplus\n\
         }\n\
         #endif\n\
 
         #endif /* MESALINK_OPTIONS_H */\n\
-    ")?;
+    ",
+    )?;
 
     println!("cargo:include={}", include_dir.display());
 
