@@ -10,6 +10,7 @@ keywords = ["tls", "ssl", "rust"]
 homepage = "https://github.com/mesalock-linux/mesalink"
 repository = "https://github.com/mesalock-linux/mesalink"
 categories = ["network-programming"]
+links = "mesalink"
 build = "build.rs"
 
 [badges]
