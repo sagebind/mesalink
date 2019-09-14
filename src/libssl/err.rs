@@ -1268,5 +1268,4 @@ mod tests {
         mesalink_ERR_clear_error();
         mesalink_ERR_free_error_strings();
     }
-
 }
