@@ -1966,7 +1966,10 @@ pub extern "C" fn mesalink_SSL_set_fd(ssl_ptr: *mut MESALINK_SSL, fd: c_int) -> 
 
     #[cfg(windows)]
     {
-        check_inner_result!(inner_mesalink_ssl_set_socket(ssl_ptr, fd as libc::SOCKET), SSL_FAILURE)
+        check_inner_result!(
+        inner_mesalink_ssl_set_socket(ssl_ptr, fd as libc::SOCKET),
+        SSL_FAILURE
+        )
     }
 }
 
@@ -1997,7 +2000,10 @@ pub extern "C" fn mesalink_SSL_get_fd(ssl_ptr: *mut MESALINK_SSL) -> c_int {
 
     #[cfg(windows)]
     {
-        check_inner_result!(inner_measlink_ssl_get_socket(ssl_ptr), SSL_FAILURE) as c_int
+        check_inner_result!(
+        inner_measlink_ssl_get_socket(ssl_ptr).map(|socket| socket as c_int),
+        SSL_FAILURE
+        )
     }
 }
 
