@@ -783,7 +783,7 @@ impl<T: AsRawFd> OpenFileStream for T {
 impl<T: AsRawHandle> OpenFileStream for T {
     unsafe fn open_file_stream_r(&self) -> *mut libc::FILE {
         let handle = self.as_raw_handle();
-        match libc::open_osfhandle(handle, 0) {
+        match libc::open_osfhandle(handle as libc::intptr_t, 0) {
             -1 => ptr::null_mut(),
             fd => libc::fdopen(fd, b"r\0".as_ptr() as *const c_char),
         }
@@ -791,7 +791,7 @@ impl<T: AsRawHandle> OpenFileStream for T {
 
     unsafe fn open_file_stream_w(&self) -> *mut libc::FILE {
         let handle = self.as_raw_handle();
-        match libc::open_osfhandle(handle, 0) {
+        match libc::open_osfhandle(handle as libc::intptr_t, 0) {
             -1 => ptr::null_mut(),
             fd => libc::fdopen(fd, b"w\0".as_ptr() as *const c_char),
         }
